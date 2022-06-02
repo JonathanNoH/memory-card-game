@@ -12,6 +12,7 @@ const Card = (props) => {
       setClicked(false);
       // TODO send up info that the game was lost
     }
+    props.clicked();
   }
 
   return (
