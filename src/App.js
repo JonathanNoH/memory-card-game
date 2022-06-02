@@ -29,13 +29,22 @@ function App() {
   const addPoint = () => {
     setScore((prevScore) => prevScore + 1);
   }
-  const handleLoss = () => {
+  const reset = () => {
     setScore(0);
     setCurrentLevel(0);
   }
+  const handleLoss = () => {
+    reset();
+  }
   const handleWin = () => {
     console.log("woohoo");
-    setCurrentLevel(currentLevel + 1);
+    if (currentLevel === levels.length - 1) {
+      reset();
+      //think i need to do real way to reset but it seems to work somehow
+    } else {
+      setCurrentLevel(currentLevel + 1);
+    }
+    
   }
   //check for win
   useEffect(() => {
