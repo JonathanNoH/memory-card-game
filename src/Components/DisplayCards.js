@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Card from "./Card";
 import uniqid from "uniqid";
 import "../styles/displayCards.css";
@@ -24,9 +24,13 @@ const DisplayCards = (props) => {
     return array;
   }
 
-  const handleClick = () => {
-    setListCards(shuffle([...listCards]));
-    console.log("made it");
+  const handleClick = (hasBeenClicked) => {
+    if (hasBeenClicked) {
+      props.passLoss();
+    } else {
+      setListCards(shuffle([...listCards]));
+      props.addPoint();
+    }
   }
 
   const [listCards, setListCards] = useState([...props.numCards].map((cardProps) => {

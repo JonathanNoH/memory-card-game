@@ -2,17 +2,11 @@ import React, { useState } from "react";
 import "../styles/card.css";
 
 const Card = (props) => {
-  const [clicked, setClicked] = useState(false);
+  const [hasBeenClicked, setHasBeenClicked] = useState(false);
 
   const handleClick = () => {
-    if (!clicked) {
-      setClicked(true);
-      // TODO send up info to refresh cards randomized
-    } else {
-      setClicked(false);
-      // TODO send up info that the game was lost
-    }
-    props.clicked();
+    props.clicked(hasBeenClicked);
+    setHasBeenClicked(!hasBeenClicked);
   }
 
   return (
