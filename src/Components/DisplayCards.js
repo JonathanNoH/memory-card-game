@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import uniqid from "uniqid";
 import "../styles/displayCards.css";
@@ -33,10 +33,14 @@ const DisplayCards = (props) => {
     }
   }
 
-  const [listCards, setListCards] = useState([...props.numCards].map((cardProps) => {
-    return <Card clicked={handleClick} key={uniqid()} value={cardProps}/>
-  }))
-  
+  const [listCards, setListCards] = useState([...props.currentCards].map((cardProps) => {
+    const id = uniqid();
+    return <Card clicked={handleClick} key={id} id={id} value={cardProps}/>
+  }));
+
+  useEffect(() => {
+    console.log("cards changed");
+  }, [props.currentCards])
 
   return (
     <div className="card-holder">

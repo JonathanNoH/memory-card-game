@@ -5,8 +5,8 @@ const Card = (props) => {
   const [hasBeenClicked, setHasBeenClicked] = useState(false);
 
   const handleClick = () => {
-    props.clicked(hasBeenClicked);
     setHasBeenClicked(!hasBeenClicked);
+    props.clicked(hasBeenClicked);
   }
 
   return (
