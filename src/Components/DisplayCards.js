@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Card from "./Card";
 import uniqid from "uniqid";
+import "../styles/displayCards.css";
 
 const DisplayCards = (props) => {
 
@@ -8,7 +9,7 @@ const DisplayCards = (props) => {
     return <Card key={uniqid()} value={cardProps}/>
   })
   return (
-    <div>
+    <div className="card-holder">
       {listCards}
     </div>
   )
