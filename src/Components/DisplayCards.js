@@ -28,8 +28,8 @@ const DisplayCards = (props) => {
     if (hasBeenClicked) {
       props.passLoss();
     } else {
-      setListCards(shuffle([...listCards]));
       props.addPoint();
+      setListCards(shuffle([...listCards]));
     }
   }
 
