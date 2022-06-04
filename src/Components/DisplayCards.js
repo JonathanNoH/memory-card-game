@@ -33,14 +33,16 @@ const DisplayCards = (props) => {
     }
   }
 
+  const [arghReset, setArghReset] = useState(false);
+  useEffect(() => {
+    console.log("display sees reset");
+    setArghReset((prevState) => !prevState);
+  }, [props.resetAlert])
+
   const [listCards, setListCards] = useState([...props.currentCards].map((cardProps) => {
     const id = uniqid();
-    return <Card clicked={handleClick} key={id} id={id} value={cardProps}/>
+    return <Card clicked={handleClick} key={id} resetAlert={arghReset} value={cardProps}/>
   }));
-
-  useEffect(() => {
-    console.log("cards changed");
-  }, [props.currentCards])
 
   return (
     <div className="card-holder">

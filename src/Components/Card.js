@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/card.css";
 
 const Card = (props) => {
   const [hasBeenClicked, setHasBeenClicked] = useState(false);
 
   const handleClick = () => {
-    setHasBeenClicked(!hasBeenClicked);
     props.clicked(hasBeenClicked);
+    setHasBeenClicked((prevState) => !prevState);
   }
+
+  useEffect(() => {
+    setHasBeenClicked(false);
+    console.log('card sees reset');
+  }, [props.resetAlert])
 
   return (
     <div className="card" onClick={handleClick}>

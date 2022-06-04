@@ -29,18 +29,31 @@ function App() {
   const addPoint = () => {
     setScore((prevScore) => prevScore + 1);
   }
+
+  const [gameInProgress, setGameInProgress] = useState(false);
+  const startGame = () => {
+    setGameInProgress(true);
+  }
+  const endGame = () => {
+    setGameInProgress(false);
+  }
+
+  //send alert down to cards so they can change state to not been clicked
+  const [resetAlert, setResetAlert] = useState(false);
   const reset = () => {
     setScore(0);
     setCurrentLevel(0);
+    setResetAlert((prevState) => !prevState);
   }
   const handleLoss = () => {
     reset();
+    endGame();
   }
   const handleWin = () => {
     console.log("woohoo");
     if (currentLevel === levels.length - 1) {
       reset();
-      //think i need to do real way to reset but it seems to work somehow
+      endGame();
     } else {
       setCurrentLevel(currentLevel + 1);
     }
@@ -66,12 +79,15 @@ function App() {
   return (
     <div className="App">
       <Scoreboard score={score} highScore={highScore}/>
-      {currentLevel === 0 &&
-        <DisplayCards 
-          passLoss={handleLoss}
-          addPoint={addPoint}
-          currentCards={levels[0]}
-        />
+      <button onClick={startGame}>Start</button>
+      {gameInProgress &&
+        (currentLevel === 0 &&
+          <DisplayCards 
+            passLoss={handleLoss}
+            addPoint={addPoint}
+            currentCards={levels[0]}
+            resetAlert={resetAlert}
+          />)
       }
       {currentLevel === 1 &&
         <DisplayCards
