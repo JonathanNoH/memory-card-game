@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './styles/App.css';
+import './styles/reset.css';
 import DisplayCards from './Components/DisplayCards';
 import Scoreboard from './Components/Scoreboard';
+import Header from './Components/Header';
 
 function App() {
   //levels
@@ -77,25 +79,28 @@ function App() {
   }, [score, highScore]);
 
   return (
-    <div className="App">
+    <div className="app">
+      <Header />
       <Scoreboard score={score} highScore={highScore}/>
-      <button onClick={startGame}>Start</button>
-      {gameInProgress &&
-        (currentLevel === 0 &&
-          <DisplayCards 
+      <div className="game">
+        {!gameInProgress && <button onClick={startGame}>Start</button>}
+        {gameInProgress &&
+          (currentLevel === 0 &&
+            <DisplayCards
+              passLoss={handleLoss}
+              addPoint={addPoint}
+              currentCards={levels[0]}
+              resetAlert={resetAlert}
+            />)
+        }
+        {currentLevel === 1 &&
+          <DisplayCards
             passLoss={handleLoss}
             addPoint={addPoint}
-            currentCards={levels[0]}
-            resetAlert={resetAlert}
-          />)
-      }
-      {currentLevel === 1 &&
-        <DisplayCards
-          passLoss={handleLoss}
-          addPoint={addPoint}
-          currentCards={levels[1]}
-        />
-      }
+            currentCards={levels[1]}
+          />
+        }
+      </div>
     </div>
   );
 }

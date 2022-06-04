@@ -1,10 +1,11 @@
 import React from "react";
+import "../styles/scoreboard.css";
 
 const Scoreboard = (props) => {
   return (
-    <div>
-      <div>{props.score}</div>
-      <div>{props.highScore}</div>
+    <div className="scoreboard">
+      <div>Score : {props.score}</div>
+      <div>High Score : {props.highScore}</div>
     </div>
   )
 }
